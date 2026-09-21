@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>모바일 최적화 만년 주간 플래너 & 월간 캘린더</title>
+    <title>모바일 완벽 최적화 만년 플래너 & 월간 캘린더</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -17,13 +17,13 @@
             border-right: 1px solid #f1f5f9;
         }
         .calendar-day-cell {
-            min-height: 90px;
+            min-height: 85px;
             border-bottom: 1px solid #e2e8f0;
             border-right: 1px solid #e2e8f0;
         }
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
@@ -42,18 +42,18 @@
 <body class="h-screen flex flex-col overflow-hidden">
 
     <!-- Top Header with View Switcher, Backup/Restore & Perpetual Selector -->
-    <header class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shrink-0 shadow-sm">
-        <div class="flex items-center gap-3">
-            <span class="text-xl sm:text-2xl">🗓️</span>
+    <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0 shadow-sm">
+        <div class="flex items-center gap-2">
+            <span class="text-xl">🗓️</span>
             <div class="flex items-center gap-1.5">
                 <!-- Perpetual Year & Month Selectors -->
-                <select id="global-year" onchange="onYearMonthChange()" class="text-xs sm:text-sm font-bold border border-slate-200 rounded-lg px-2 py-1 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <select id="global-year" onchange="onYearMonthChange()" class="text-xs font-bold border border-slate-200 rounded-lg px-1.5 py-1 bg-white text-slate-800 focus:outline-none">
                     <option value="2025">2025년</option>
                     <option value="2026" selected>2026년</option>
                     <option value="2027">2027년</option>
                     <option value="2028">2028년</option>
                 </select>
-                <select id="global-month" onchange="onYearMonthChange()" class="text-xs sm:text-sm font-bold border border-slate-200 rounded-lg px-2 py-1 bg-white text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <select id="global-month" onchange="onYearMonthChange()" class="text-xs font-bold border border-slate-200 rounded-lg px-1.5 py-1 bg-white text-indigo-600 focus:outline-none">
                     <option value="1">1월</option><option value="2">2월</option><option value="3">3월</option>
                     <option value="4">4월</option><option value="5">5월</option><option value="6">6월</option>
                     <option value="7">7월</option><option value="8">8월</option><option value="9" selected>9월</option>
@@ -65,46 +65,46 @@
         <div class="flex items-center gap-2 flex-wrap">
             <!-- Backup & Restore Buttons -->
             <div class="flex items-center gap-1">
-                <button onclick="backupData()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl transition flex items-center gap-1">
-                    <span>💾 백업</span>
+                <button onclick="backupData()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-semibold px-2 py-1.5 rounded-lg transition">
+                    💾 백업
                 </button>
-                <label class="bg-sky-50 hover:bg-sky-100 text-sky-700 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl transition flex items-center gap-1 cursor-pointer">
-                    <span>📂 복원</span>
+                <label class="bg-sky-50 hover:bg-sky-100 text-sky-700 text-[11px] font-semibold px-2 py-1.5 rounded-lg transition cursor-pointer">
+                    📂 복원
                     <input type="file" id="restore-file" accept=".json" onchange="restoreData(event)" class="hidden">
                 </label>
             </div>
 
-            <div class="flex items-center bg-slate-100 p-1 rounded-xl">
-                <button id="tab-monthly" onclick="switchView('monthly')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-600 shadow-sm transition">
-                    📅 월간
+            <div class="flex items-center bg-slate-100 p-0.5 rounded-lg">
+                <button id="tab-monthly" onclick="switchView('monthly')" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-indigo-600 shadow-sm transition">
+                    월간
                 </button>
-                <button id="tab-weekly" onclick="switchView('weekly')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
-                    📊 주간 (<span id="current-week-label">1주차</span>)
+                <button id="tab-weekly" onclick="switchView('weekly')" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
+                    주간 (<span id="current-week-label">1주</span>)
                 </button>
             </div>
             
-            <button id="collapse-night-btn" onclick="toggleNightCollapse()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1.5 rounded-xl transition hidden sm:flex items-center gap-1">
-                <span>🌙 야간숨기기</span>
+            <button id="collapse-night-btn" onclick="toggleNightCollapse()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[11px] font-semibold px-2 py-1.5 rounded-lg transition hidden sm:flex items-center">
+                🌙 야간숨기기
             </button>
         </div>
     </header>
 
     <!-- Main Workspace Container -->
-    <div class="flex flex-1 overflow-hidden relative">
+    <div class="flex flex-1 overflow-hidden relative flex-col lg:flex-row">
 
         <!-- VIEW 1: MONTHLY CALENDAR VIEW (Perpetual Month Grid) -->
-        <div id="view-monthly" class="flex-1 flex flex-col bg-slate-50 p-4 sm:p-6 overflow-y-auto">
-            <div class="max-w-6xl mx-auto w-full flex flex-col gap-4 pb-12">
+        <div id="view-monthly" class="flex-1 flex flex-col bg-slate-50 p-3 sm:p-6 overflow-y-auto">
+            <div class="max-w-6xl mx-auto w-full flex flex-col gap-3 pb-12">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 id="monthly-title" class="text-base sm:text-lg font-bold text-slate-800">2026년 9월 월간 캘린더</h2>
-                        <p class="text-[11px] sm:text-xs text-slate-500">일별 등록된 스케줄을 확인하고, 날짜를 클릭하여 해당 주간 플래너로 이동하세요.</p>
+                        <h2 id="monthly-title" class="text-sm sm:text-base font-bold text-slate-800">2026년 9월 월간 캘린더</h2>
+                        <p class="text-[11px] sm:text-xs text-slate-500">날짜를 클릭하여 해당 주간 플래너로 이동하세요.</p>
                     </div>
                 </div>
 
                 <!-- Standard Month Calendar Grid -->
-                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div class="grid grid-cols-7 bg-slate-50 border-b border-slate-200 text-center text-xs font-bold text-slate-600 py-3">
+                <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div class="grid grid-cols-7 bg-slate-50 border-b border-slate-200 text-center text-[11px] sm:text-xs font-bold text-slate-600 py-2">
                         <div class="text-slate-500">월</div>
                         <div class="text-slate-500">화</div>
                         <div class="text-slate-500">수</div>
@@ -121,11 +121,11 @@
         <!-- VIEW 2: WEEKLY PLANNER VIEW -->
         <div id="view-weekly" class="flex-1 flex flex-col lg:flex-row overflow-hidden hidden">
             <!-- Left Sidebar: Todo Lists & Schedule Management -->
-            <div class="w-full lg:w-[420px] bg-white border-r border-slate-200 flex flex-col shrink-0 overflow-y-auto">
+            <div class="w-full lg:w-[400px] bg-white border-r border-slate-200 flex flex-col shrink-0 overflow-y-auto max-h-[50vh] lg:max-h-none">
                 
-                <div class="p-4 sm:p-5 border-b border-slate-100 flex flex-col gap-4 pb-12">
+                <div class="p-3 sm:p-4 border-b border-slate-100 flex flex-col gap-3 pb-8">
                     <div class="flex items-center justify-between">
-                        <h2 class="font-bold text-slate-700 text-xs sm:text-sm flex items-center gap-2">
+                        <h2 class="font-bold text-slate-700 text-xs sm:text-sm flex items-center gap-1.5">
                             <span>🎯</span> 스케줄 관리 (<span id="sidebar-week-title">1주차</span>)
                         </h2>
                         <button onclick="switchView('monthly')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2.5 py-1 rounded-lg font-semibold transition">
@@ -133,16 +133,16 @@
                         </button>
                     </div>
                     
-                    <div id="todo-form" class="flex flex-col gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <div id="todo-form" class="flex flex-col gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
                         <input type="hidden" id="edit-id" value="">
                         
                         <input type="text" id="todo-title" placeholder="스케줄 제목 입력 (예: 업무, 수영)..." required
-                            class="text-xs sm:text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            class="text-xs border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         
                         <!-- 기준 요일 -->
                         <div>
-                            <label class="text-[10px] font-semibold text-slate-500 mb-1 block">기준 요일</label>
-                            <select id="todo-day" class="w-full text-xs border border-slate-200 rounded-lg px-2 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <label class="text-[10px] font-semibold text-slate-500 mb-0.5 block">기준 요일</label>
+                            <select id="todo-day" class="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none">
                                 <option value="0">월요일</option>
                                 <option value="1">화요일</option>
                                 <option value="2">수요일</option>
@@ -155,40 +155,37 @@
 
                         <!-- 30분 단위 선택형 시간 범위 입력 -->
                         <div>
-                            <label class="text-[10px] font-semibold text-slate-500 mb-1 block">시간 범위 선택 (30분 단위)</label>
-                            <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-2 text-xs flex-wrap">
+                            <label class="text-[10px] font-semibold text-slate-500 mb-0.5 block">시간 범위 (30분 단위)</label>
+                            <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1.5 text-xs flex-wrap">
                                 <select id="start-h" class="border border-slate-200 rounded p-1 text-xs bg-white"></select> 시
                                 <select id="start-m" class="border border-slate-200 rounded p-1 text-xs bg-white">
-                                    <option value="0">00분</option>
-                                    <option value="30">30분</option>
+                                    <option value="0">00분</option><option value="30">30분</option>
                                 </select>
-                                <span class="mx-0.5 font-bold">~</span>
+                                <span class="font-bold">~</span>
                                 <select id="end-h" class="border border-slate-200 rounded p-1 text-xs bg-white"></select> 시
                                 <select id="end-m" class="border border-slate-200 rounded p-1 text-xs bg-white">
-                                    <option value="0">00분</option>
-                                    <option value="30">30분</option>
+                                    <option value="0">00분</option><option value="30">30분</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- 메모 등록 기능 -->
                         <div>
-                            <label class="text-[10px] font-semibold text-slate-500 mb-1 block">메모 등록</label>
-                            <textarea id="todo-memo" placeholder="세부 내용이나 메모를 입력하세요..." rows="2"
-                                class="w-full text-xs border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            <label class="text-[10px] font-semibold text-slate-500 mb-0.5 block">메모 등록</label>
+                            <textarea id="todo-memo" placeholder="세부 내용이나 메모..." rows="1"
+                                class="w-full text-xs border border-slate-200 rounded-lg px-2.5 py-1.5 bg-white focus:outline-none"></textarea>
                         </div>
 
                         <!-- Repeat Cycle & Period Settings (Linked with Checkbox) -->
-                        <div class="flex flex-col gap-2 pt-1 border-t border-slate-200">
+                        <div class="flex flex-col gap-1.5 pt-1 border-t border-slate-200">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" id="main-repeat-check" onchange="handleMainRepeatCheck(this.checked)" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                <input type="checkbox" id="main-repeat-check" onchange="handleMainRepeatCheck(this.checked)" class="w-4 h-4 rounded text-indigo-600 cursor-pointer">
                                 <label for="main-repeat-check" class="text-xs font-semibold text-slate-700 cursor-pointer">반복 일정 설정</label>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-2 gap-1.5">
                                 <div>
-                                    <label class="text-[10px] font-semibold text-slate-500 mb-1 block">반복 주기</label>
-                                    <select id="todo-repeat" onchange="handleRepeatChange(this.value)" disabled class="w-full text-xs border border-slate-200 rounded-lg px-2 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <select id="todo-repeat" onchange="handleRepeatChange(this.value)" disabled class="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white">
                                         <option value="daily">매일</option>
                                         <option value="weekly">매주</option>
                                         <option value="monthly">매월</option>
@@ -197,8 +194,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="text-[10px] font-semibold text-slate-500 mb-1 block">반복 기간</label>
-                                    <select id="todo-period" onchange="handlePeriodChange(this.value)" disabled class="w-full text-xs border border-slate-200 rounded-lg px-2 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <select id="todo-period" onchange="handlePeriodChange(this.value)" disabled class="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white">
                                         <option value="1m">1개월</option>
                                         <option value="6m">6개월</option>
                                         <option value="1y">1년</option>
@@ -210,8 +206,7 @@
 
                         <!-- Custom Period Date Input -->
                         <div id="custom-period-wrapper" class="hidden items-center gap-2">
-                            <input type="date" id="todo-until"
-                                class="flex-1 text-xs border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input type="date" id="todo-until" class="flex-1 text-xs border border-slate-200 rounded-lg px-2 py-1 bg-white">
                             <span class="text-xs text-slate-500">까지</span>
                         </div>
 
@@ -219,148 +214,143 @@
                         <div id="repeat-days-wrapper" class="hidden flex flex-col gap-1 pt-1 border-t border-slate-200">
                             <label class="text-[10px] font-semibold text-indigo-600">반복 요일 지정 (다중 선택)</label>
                             <div class="grid grid-cols-7 gap-1 text-center" id="day-buttons-container">
-                                <button type="button" data-day="0" onclick="toggleDayButton(0)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">월</button>
-                                <button type="button" data-day="1" onclick="toggleDayButton(1)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">화</button>
-                                <button type="button" data-day="2" onclick="toggleDayButton(2)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">수</button>
-                                <button type="button" data-day="3" onclick="toggleDayButton(3)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">목</button>
-                                <button type="button" data-day="4" onclick="toggleDayButton(4)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">금</button>
-                                <button type="button" data-day="5" onclick="toggleDayButton(5)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">토</button>
-                                <button type="button" data-day="6" onclick="toggleDayButton(6)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition">일</button>
+                                <button type="button" data-day="0" onclick="toggleDayButton(0)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">월</button>
+                                <button type="button" data-day="1" onclick="toggleDayButton(1)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">화</button>
+                                <button type="button" data-day="2" onclick="toggleDayButton(2)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">수</button>
+                                <button type="button" data-day="3" onclick="toggleDayButton(3)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">목</button>
+                                <button type="button" data-day="4" onclick="toggleDayButton(4)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">금</button>
+                                <button type="button" data-day="5" onclick="toggleDayButton(5)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">토</button>
+                                <button type="button" data-day="6" onclick="toggleDayButton(6)" class="day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">일</button>
                             </div>
                         </div>
 
                         <div class="flex gap-2 pt-1">
                             <button type="button" id="submit-btn" onclick="saveTodo()" class="flex-1 bg-indigo-600 text-white py-2 rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">
-                                스케줄 즉시 추가
+                                스케줄 추가
                             </button>
-                            <button type="button" id="cancel-edit-btn" onclick="resetForm()" class="hidden bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold hover:bg-slate-300 transition">
+                            <button type="button" id="cancel-edit-btn" onclick="resetForm()" class="hidden bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-xs font-semibold">
                                 취소
                             </button>
                         </div>
                     </div>
 
                     <!-- Separated Sections: 1. 스케줄표, 2. 오늘의 할일 목록 -->
-                    <div class="flex flex-col gap-3">
+                    <div class="flex flex-col gap-2.5">
                         <div>
-                            <div class="text-xs font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
-                                <span>📋 등록된 스케줄표</span>
-                            </div>
-                            <div id="schedule-list" class="flex flex-col gap-2 max-h-[150px] overflow-y-auto p-1 bg-slate-50/50 rounded-lg border border-slate-100"></div>
+                            <div class="text-[11px] font-semibold text-slate-700 mb-1">📋 등록된 스케줄표</div>
+                            <div id="schedule-list" class="flex flex-col gap-1.5 max-h-[120px] overflow-y-auto p-1 bg-slate-50/50 rounded-lg border border-slate-100"></div>
                         </div>
                         <div>
-                            <div class="text-xs font-semibold text-indigo-600 mb-1.5 flex flex-col gap-1.5">
+                            <div class="text-[11px] font-semibold text-indigo-600 mb-1 flex flex-col gap-1">
                                 <div class="flex items-center justify-between">
-                                    <span>✅ 오늘의 할일 목록 (스케줄 연동)</span>
-                                    <button onclick="openQuickModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-semibold px-2 py-1 rounded-lg transition shadow-sm">
+                                    <span>✅ 오늘의 할일 목록 (연동)</span>
+                                    <button onclick="openQuickModal()" class="bg-indigo-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm">
                                         + 할일 추가
                                     </button>
                                 </div>
                                 <!-- Button-style Day Selector for Checklist -->
                                 <div class="grid grid-cols-7 gap-1 text-center" id="checklist-day-buttons">
-                                    <button type="button" data-cday="0" onclick="setChecklistDay(0)" class="cday-btn text-[11px] font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1 transition shadow-sm">월</button>
-                                    <button type="button" data-cday="1" onclick="setChecklistDay(1)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">화</button>
-                                    <button type="button" data-cday="2" onclick="setChecklistDay(2)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">수</button>
-                                    <button type="button" data-cday="3" onclick="setChecklistDay(3)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">목</button>
-                                    <button type="button" data-cday="4" onclick="setChecklistDay(4)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">금</button>
-                                    <button type="button" data-cday="5" onclick="setChecklistDay(5)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">토</button>
-                                    <button type="button" data-cday="6" onclick="setChecklistDay(6)" class="cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">일</button>
+                                    <button type="button" data-cday="0" onclick="setChecklistDay(0)" class="cday-btn text-[10px] font-bold bg-indigo-600 text-white rounded py-0.5">월</button>
+                                    <button type="button" data-cday="1" onclick="setChecklistDay(1)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">화</button>
+                                    <button type="button" data-cday="2" onclick="setChecklistDay(2)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">수</button>
+                                    <button type="button" data-cday="3" onclick="setChecklistDay(3)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">목</button>
+                                    <button type="button" data-cday="4" onclick="setChecklistDay(4)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">금</button>
+                                    <button type="button" data-cday="5" onclick="setChecklistDay(5)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">토</button>
+                                    <button type="button" data-cday="6" onclick="setChecklistDay(6)" class="cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700">일</button>
                                 </div>
                             </div>
-                            <div id="extracted-checklist" class="flex flex-col gap-2 max-h-[150px] overflow-y-auto p-1 bg-indigo-50/30 rounded-lg border border-indigo-100"></div>
+                            <div id="extracted-checklist" class="flex flex-col gap-1.5 max-h-[120px] overflow-y-auto p-1 bg-indigo-50/30 rounded-lg border border-indigo-100"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Right Content: Weekly Calendar Time Grid -->
-            <div class="flex-1 flex flex-col bg-slate-100 overflow-hidden min-w-[320px]">
+            <div class="flex-1 flex flex-col bg-slate-100 overflow-hidden min-w-0">
                 <!-- Weekly View Header with Navigation Arrows -->
-                <div class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex items-center justify-between shrink-0 shadow-sm flex-wrap gap-2">
+                <div class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex items-center justify-between shrink-0 shadow-sm flex-wrap gap-2">
                     <div class="flex items-center gap-2">
-                        <button onclick="changeWeek(-1)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-700 transition flex items-center gap-1">
+                        <button onclick="changeWeek(-1)" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-700 flex items-center gap-0.5">
                             <span>◀</span> 이전주
                         </button>
-                        <span id="weekly-header-title" class="text-xs sm:text-sm font-bold text-indigo-600">1주차 스케줄</span>
-                        <button onclick="changeWeek(1)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-700 transition flex items-center gap-1">
+                        <span id="weekly-header-title" class="text-xs font-bold text-indigo-600">1주차</span>
+                        <button onclick="changeWeek(1)" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-700 flex items-center gap-0.5">
                             다음주 <span>▶</span>
                         </button>
                     </div>
-                    <div class="text-[11px] sm:text-xs text-slate-400 font-medium" id="weekly-date-range-info">
+                    <div class="text-[11px] text-slate-400 font-medium" id="weekly-date-range-info">
                         날짜 범위
                     </div>
                 </div>
 
-                <div class="grid grid-cols-8 bg-white border-b border-slate-200 text-center text-xs sm:text-sm font-semibold text-slate-600 shrink-0 select-none overflow-x-auto">
-                    <div class="py-3 border-r border-slate-200 bg-slate-50 text-slate-400 min-w-[50px]">시간</div>
-                    <div class="py-3 border-r border-slate-200 min-w-[70px]" id="header-day-0">월</div>
-                    <div class="py-3 border-r border-slate-200 min-w-[70px]" id="header-day-1">화</div>
-                    <div class="py-3 border-r border-slate-200 min-w-[70px]" id="header-day-2">수</div>
-                    <div class="py-3 border-r border-slate-200 min-w-[70px]" id="header-day-3">목</div>
-                    <div class="py-3 border-r border-slate-200 min-w-[70px]" id="header-day-4">금</div>
-                    <div class="py-3 border-r border-slate-200 text-blue-600 min-w-[70px]" id="header-day-5">토</div>
-                    <div class="py-3 text-rose-600 min-w-[70px]" id="header-day-6">일</div>
+                <div class="grid grid-cols-8 bg-white border-b border-slate-200 text-center text-xs font-semibold text-slate-600 shrink-0 select-none overflow-x-auto">
+                    <div class="py-2.5 border-r border-slate-200 bg-slate-50 text-slate-400 min-w-[45px]">시간</div>
+                    <div class="py-2.5 border-r border-slate-200 min-w-[65px]" id="header-day-0">월</div>
+                    <div class="py-2.5 border-r border-slate-200 min-w-[65px]" id="header-day-1">화</div>
+                    <div class="py-2.5 border-r border-slate-200 min-w-[65px]" id="header-day-2">수</div>
+                    <div class="py-2.5 border-r border-slate-200 min-w-[65px]" id="header-day-3">목</div>
+                    <div class="py-2.5 border-r border-slate-200 min-w-[65px]" id="header-day-4">금</div>
+                    <div class="py-2.5 border-r border-slate-200 text-blue-600 min-w-[65px]" id="header-day-5">토</div>
+                    <div class="py-2.5 text-rose-600 min-w-[65px]" id="header-day-6">일</div>
                 </div>
                 <div class="flex-1 overflow-auto relative bg-white pb-20" id="calendar-grid-container">
-                    <div class="grid grid-cols-8 relative min-w-[550px]" id="calendar-grid"></div>
+                    <div class="grid grid-cols-8 relative min-w-[500px]" id="calendar-grid"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- QUICK TASK POPUP MODAL WITH BUTTON-BASED DAY SELECTOR & MEMO -->
-    <div id="quick-task-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl p-5 sm:p-6 w-full max-w-[380px] shadow-xl flex flex-col gap-4 border border-slate-100">
+    <!-- QUICK TASK POPUP MODAL -->
+    <div id="quick-task-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl p-4 sm:p-6 w-full max-w-[360px] shadow-xl flex flex-col gap-3 border border-slate-100">
             <div class="flex items-center justify-between">
-                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2"><span>✨</span> 할 일 간편 추가 (팝업)</h3>
+                <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5"><span>✨</span> 할 일 간편 추가 (팝업)</h3>
                 <button onclick="closeQuickModal()" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
             </div>
             
-            <div class="flex flex-col gap-3 text-xs">
-                <!-- 요일 버튼 선택 -->
+            <div class="flex flex-col gap-2.5 text-xs">
                 <div>
-                    <label class="font-semibold text-slate-500 mb-1 block">적용 요일 선택</label>
+                    <label class="font-semibold text-slate-500 mb-0.5 block">적용 요일</label>
                     <div class="grid grid-cols-7 gap-1 text-center" id="quick-day-buttons">
-                        <button type="button" data-qday="0" onclick="setQuickDay(0)" class="qday-btn text-[11px] font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1 transition shadow-sm">월</button>
-                        <button type="button" data-qday="1" onclick="setQuickDay(1)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">화</button>
-                        <button type="button" data-qday="2" onclick="setQuickDay(2)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">수</button>
-                        <button type="button" data-qday="3" onclick="setQuickDay(3)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">목</button>
-                        <button type="button" data-qday="4" onclick="setQuickDay(4)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">금</button>
-                        <button type="button" data-qday="5" onclick="setQuickDay(5)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">토</button>
-                        <button type="button" data-qday="6" onclick="setQuickDay(6)" class="qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100">일</button>
+                        <button type="button" data-qday="0" onclick="setQuickDay(0)" class="qday-btn text-[10px] font-bold bg-indigo-600 text-white rounded py-1">월</button>
+                        <button type="button" data-qday="1" onclick="setQuickDay(1)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">화</button>
+                        <button type="button" data-qday="2" onclick="setQuickDay(2)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">수</button>
+                        <button type="button" data-qday="3" onclick="setQuickDay(3)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">목</button>
+                        <button type="button" data-qday="4" onclick="setQuickDay(4)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">금</button>
+                        <button type="button" data-qday="5" onclick="setQuickDay(5)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">토</button>
+                        <button type="button" data-qday="6" onclick="setQuickDay(6)" class="qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700">일</button>
                     </div>
                 </div>
 
                 <div>
-                    <label class="font-semibold text-slate-500 mb-1 block">할 일 제목</label>
-                    <input type="text" id="quick-title" placeholder="내용 입력..." class="w-full border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="font-semibold text-slate-500 mb-0.5 block">할 일 제목</label>
+                    <input type="text" id="quick-title" placeholder="내용 입력..." class="w-full border border-slate-200 rounded-lg px-2.5 py-1.5 bg-white focus:outline-none">
                 </div>
                 
                 <div>
-                    <label class="font-semibold text-slate-500 mb-1 block">시간 설정 (30분 단위)</label>
-                    <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg p-2 flex-wrap">
+                    <label class="font-semibold text-slate-500 mb-0.5 block">시간 설정 (30분 단위)</label>
+                    <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg p-1.5 flex-wrap">
                         <select id="quick-start-h" class="border border-slate-200 rounded p-1 text-xs bg-white"></select> 시
                         <select id="quick-start-m" class="border border-slate-200 rounded p-1 text-xs bg-white">
-                            <option value="0">00분</option>
-                            <option value="30">30분</option>
+                            <option value="0">00분</option><option value="30">30분</option>
                         </select>
-                        <span class="mx-0.5 font-bold">~</span>
+                        <span class="font-bold">~</span>
                         <select id="quick-end-h" class="border border-slate-200 rounded p-1 text-xs bg-white"></select> 시
                         <select id="quick-end-m" class="border border-slate-200 rounded p-1 text-xs bg-white">
-                            <option value="0">00분</option>
-                            <option value="30">30분</option>
+                            <option value="0">00분</option><option value="30">30분</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="font-semibold text-slate-500 mb-1 block">메모 (선택사항)</label>
-                    <textarea id="quick-memo" placeholder="세부 메모를 입력하세요..." rows="2" class="w-full border border-slate-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    <label class="font-semibold text-slate-500 mb-0.5 block">메모 (선택)</label>
+                    <textarea id="quick-memo" placeholder="세부 메모..." rows="1" class="w-full border border-slate-200 rounded-lg px-2.5 py-1.5 bg-white focus:outline-none"></textarea>
                 </div>
             </div>
 
-            <div class="flex gap-2 justify-end pt-2">
-                <button onclick="closeQuickModal()" class="bg-slate-100 text-slate-600 px-4 py-2 rounded-xl text-xs font-semibold hover:bg-slate-200 transition">취소</button>
-                <button onclick="submitQuickTask()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-indigo-700 transition">추가하기</button>
+            <div class="flex gap-2 justify-end pt-1">
+                <button onclick="closeQuickModal()" class="bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-semibold">취소</button>
+                <button onclick="submitQuickTask()" class="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold">추가하기</button>
             </div>
         </div>
     </div>
@@ -394,12 +384,7 @@
         }
 
         function backupData() {
-            const dataObj = {
-                items: items,
-                checkedChecklistItems: checkedChecklistItems,
-                currentYear: currentYear,
-                currentMonth: currentMonth
-            };
+            const dataObj = { items, checkedChecklistItems, currentYear, currentMonth };
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataObj, null, 2));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
@@ -480,32 +465,15 @@
             
             if (!startH || !endH || !qStartH || !qEndH) return;
             
-            startH.innerHTML = '';
-            endH.innerHTML = '';
-            qStartH.innerHTML = '';
-            qEndH.innerHTML = '';
+            startH.innerHTML = ''; endH.innerHTML = ''; qStartH.innerHTML = ''; qEndH.innerHTML = '';
 
             for (let i = 0; i < 24; i++) {
-                const opt1 = document.createElement('option');
-                opt1.value = i; opt1.innerText = `${i}시`;
-                startH.appendChild(opt1);
-
-                const opt2 = document.createElement('option');
-                opt2.value = i; opt2.innerText = `${i}시`;
-                endH.appendChild(opt2);
-
-                const opt3 = document.createElement('option');
-                opt3.value = i; opt3.innerText = `${i}시`;
-                qStartH.appendChild(opt3);
-
-                const opt4 = document.createElement('option');
-                opt4.value = i; opt4.innerText = `${i}시`;
-                qEndH.appendChild(opt4);
+                const opt1 = document.createElement('option'); opt1.value = i; opt1.innerText = `${i}시`; startH.appendChild(opt1);
+                const opt2 = document.createElement('option'); opt2.value = i; opt2.innerText = `${i}시`; endH.appendChild(opt2);
+                const opt3 = document.createElement('option'); opt3.value = i; opt3.innerText = `${i}시`; qStartH.appendChild(opt3);
+                const opt4 = document.createElement('option'); opt4.value = i; opt4.innerText = `${i}시`; qEndH.appendChild(opt4);
             }
-            startH.value = '9';
-            endH.value = '18';
-            qStartH.value = '12';
-            qEndH.value = '13';
+            startH.value = '9'; endH.value = '18'; qStartH.value = '12'; qEndH.value = '13';
         }
 
         function onYearMonthChange() {
@@ -538,9 +506,9 @@
             document.querySelectorAll('.qday-btn').forEach(btn => {
                 const dVal = parseInt(btn.getAttribute('data-qday'), 10);
                 if (dVal === day) {
-                    btn.className = "qday-btn text-[11px] font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1 transition shadow-sm";
+                    btn.className = "qday-btn text-[10px] font-bold bg-indigo-600 text-white rounded py-1 shadow-sm";
                 } else {
-                    btn.className = "qday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100";
+                    btn.className = "qday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700";
                 }
             });
         }
@@ -567,17 +535,11 @@
                 year: currentYear,
                 month: currentMonth,
                 weekIndex: selectedWeekIndex,
-                title: title,
-                memo: memo,
+                title, memo,
                 day: quickSelectedDay,
-                startHour: startH,
-                startMinute: startM,
-                endHour: endH,
-                endMinute: endM,
-                durationMinutes: durationMinutes,
-                repeat: 'none',
-                untilDate: '',
-                repeatDays: [],
+                startHour: startH, startMinute: startM,
+                endHour: endH, endMinute: endM,
+                durationMinutes, repeat: 'none', untilDate: '', repeatDays: [],
                 color: randomColor
             });
 
@@ -622,21 +584,13 @@
 
             if (selectedWeekIndex < 0) {
                 currentMonth--;
-                if (currentMonth < 1) {
-                    currentMonth = 12;
-                    currentYear--;
-                    document.getElementById('global-year').value = currentYear;
-                }
+                if (currentMonth < 1) { currentMonth = 12; currentYear--; document.getElementById('global-year').value = currentYear; }
                 document.getElementById('global-month').value = currentMonth;
                 const prevWeeks = getMonthWeeks(currentYear, currentMonth);
                 selectedWeekIndex = prevWeeks.length - 1;
             } else if (selectedWeekIndex >= weeks.length) {
                 currentMonth++;
-                if (currentMonth > 12) {
-                    currentMonth = 1;
-                    currentYear++;
-                    document.getElementById('global-year').value = currentYear;
-                }
+                if (currentMonth > 12) { currentMonth = 1; currentYear++; document.getElementById('global-year').value = currentYear; }
                 document.getElementById('global-month').value = currentMonth;
                 selectedWeekIndex = 0;
             }
@@ -662,14 +616,14 @@
             if (viewName === 'monthly') {
                 monthlyView.classList.remove('hidden');
                 weeklyView.classList.add('hidden');
-                tabMonthly.className = "px-4 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-600 shadow-sm transition";
-                tabWeekly.className = "px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
+                tabMonthly.className = "px-3 py-1.5 rounded-md text-xs font-semibold bg-white text-indigo-600 shadow-sm transition";
+                tabWeekly.className = "px-3 py-1.5 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
                 renderMonthlyCalendar();
             } else {
                 monthlyView.classList.add('hidden');
                 weeklyView.classList.remove('hidden');
-                tabWeekly.className = "px-4 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-600 shadow-sm transition";
-                tabMonthly.className = "px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
+                tabWeekly.className = "px-3 py-1.5 rounded-md text-xs font-semibold bg-white text-indigo-600 shadow-sm transition";
+                tabMonthly.className = "px-3 py-1.5 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
                 
                 const weekLbl = getWeekLabel(selectedWeekIndex);
                 document.getElementById('current-week-label').innerText = weekLbl;
@@ -688,11 +642,11 @@
             isNightCollapsed = !isNightCollapsed;
             const btn = document.getElementById('collapse-night-btn');
             if (isNightCollapsed) {
-                btn.className = "bg-indigo-600 text-white text-xs font-semibold px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm";
-                btn.innerHTML = "<span>☀️ 야간 시간대(00:00~06:00) 펼치기</span>";
+                btn.className = "bg-indigo-600 text-white text-[11px] font-semibold px-2 py-1.5 rounded-lg transition flex items-center";
+                btn.innerHTML = "☀️ 야간펼치기";
             } else {
-                btn.className = "bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-2 rounded-xl transition flex items-center gap-1.5";
-                btn.innerHTML = "<span>🌙 야간 시간대(00:00~06:00) 숨기기</span>";
+                btn.className = "bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[11px] font-semibold px-2 py-1.5 rounded-lg transition flex items-center";
+                btn.innerHTML = "🌙 야간숨기기";
             }
             renderCalendarGrid();
         }
@@ -739,9 +693,9 @@
             document.querySelectorAll('.day-btn').forEach(btn => {
                 const dayVal = parseInt(btn.getAttribute('data-day'), 10);
                 if (selectedDays.includes(dayVal)) {
-                    btn.className = "day-btn text-xs font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1.5 shadow-sm transition";
+                    btn.className = "day-btn text-xs font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1.5 transition";
                 } else {
-                    btn.className = "day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700 transition hover:bg-slate-100";
+                    btn.className = "day-btn text-xs font-bold bg-white border border-slate-300 rounded py-1.5 text-slate-700";
                 }
             });
         }
@@ -751,9 +705,9 @@
             document.querySelectorAll('.cday-btn').forEach(btn => {
                 const dVal = parseInt(btn.getAttribute('data-cday'), 10);
                 if (dVal === day) {
-                    btn.className = "cday-btn text-[11px] font-bold bg-indigo-600 border border-indigo-600 text-white rounded py-1 transition shadow-sm";
+                    btn.className = "cday-btn text-[10px] font-bold bg-indigo-600 text-white rounded py-0.5 shadow-sm";
                 } else {
-                    btn.className = "cday-btn text-[11px] font-bold bg-white border border-slate-300 rounded py-1 text-slate-700 transition hover:bg-slate-100";
+                    btn.className = "cday-btn text-[10px] font-bold bg-white border border-slate-300 rounded py-0.5 text-slate-700";
                 }
             });
             renderChecklist();
@@ -777,7 +731,7 @@
                     if (dayObj) {
                         headerEl.innerText = `${dayNames[i]} (${currentMonth}/${dayObj.dayNum})`;
                         if (i === 0) startDateStr = `${currentMonth}/${dayObj.dayNum}`;
-                        if (i === 6 || dayObj.dayNum === weeksDataLastDay(currentYear, currentMonth)) endDateStr = `${currentMonth}/${dayObj.dayNum}`;
+                        if (i === 6 || dayObj.dayNum === getDaysInMonth(currentYear, currentMonth)) endDateStr = `${currentMonth}/${dayObj.dayNum}`;
                     } else {
                         headerEl.innerText = `${dayNames[i]} (-)`;
                     }
@@ -792,14 +746,8 @@
             }
         }
 
-        function weeksDataLastDay(y, m) {
-            return getDaysInMonth(y, m);
-        }
-
         function itemAppearsInMonthAndWeek(item, year, month, wIdx) {
-            if (item.repeat && item.repeat !== 'none') {
-                return true;
-            }
+            if (item.repeat && item.repeat !== 'none') return true;
             return (item.year === year && item.month === month && item.weekIndex === wIdx);
         }
 
@@ -813,7 +761,7 @@
 
             for (let i = 0; i < firstDayIndex; i++) {
                 const emptyCell = document.createElement('div');
-                emptyCell.className = "calendar-day-cell bg-slate-50/30 p-2 text-slate-300 text-xs";
+                emptyCell.className = "calendar-day-cell bg-slate-50/30 p-1.5 text-slate-300 text-xs";
                 container.appendChild(emptyCell);
             }
 
@@ -830,21 +778,21 @@
                 });
 
                 const cell = document.createElement('div');
-                cell.className = "calendar-day-cell bg-white p-2 flex flex-col gap-1 cursor-pointer hover:bg-slate-50 transition";
+                cell.className = "calendar-day-cell bg-white p-1.5 flex flex-col gap-0.5 cursor-pointer hover:bg-slate-50 transition";
                 cell.onclick = () => selectWeek(computedWeekIdx);
 
                 let eventsHtml = dayEvents.map(ev => `
-                    <div class="bg-indigo-50 text-indigo-700 text-[10px] font-semibold px-1.5 py-0.5 rounded truncate">
+                    <div class="bg-indigo-50 text-indigo-700 text-[9px] font-semibold px-1 py-0.5 rounded truncate">
                         ${String(ev.startHour).padStart(2,'0')}:${String(ev.startMinute).padStart(2,'0')} ${ev.title}
                     </div>
                 `).join('');
 
                 cell.innerHTML = `
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold ${currentDayOfWeek === 5 ? 'text-blue-600' : currentDayOfWeek === 6 ? 'text-rose-600' : 'text-slate-700'}">${dayNum}일</span>
+                        <span class="text-[11px] font-bold ${currentDayOfWeek === 5 ? 'text-blue-600' : currentDayOfWeek === 6 ? 'text-rose-600' : 'text-slate-700'}">${dayNum}일</span>
                         <span class="text-[9px] text-slate-400">${getWeekLabel(computedWeekIdx)}</span>
                     </div>
-                    <div class="flex flex-col gap-1 overflow-y-auto max-h-20">${eventsHtml}</div>
+                    <div class="flex flex-col gap-0.5 overflow-y-auto max-h-16">${eventsHtml}</div>
                 `;
                 container.appendChild(cell);
             }
@@ -888,34 +836,32 @@
 
             currentWeekItems.forEach(item => {
                 const el = document.createElement('div');
-                el.className = "flex flex-col p-2.5 rounded-lg border bg-white border-slate-200 shadow-sm transition gap-1";
+                el.className = "flex flex-col p-2 rounded-lg border bg-white border-slate-200 shadow-sm transition gap-0.5 text-xs";
 
                 let repeatDesc = '';
                 if (item.repeat && item.repeat !== 'none') {
-                    repeatDesc += ` (${repeatLabels[item.repeat] || item.repeat}`;
-                    if (item.untilDate) repeatDesc += ` ~ ${item.untilDate}`;
-                    repeatDesc += `)`;
+                    repeatDesc += ` (${repeatLabels[item.repeat] || item.repeat})`;
                 }
                 if (item.repeatDays && item.repeatDays.length > 0) {
                     const dList = item.repeatDays.map(d => dayNames[d]).join(', ');
-                    repeatDesc += ` [요일: ${dList}]`;
+                    repeatDesc += ` [${dList}]`;
                 }
 
                 const timeStr = `${String(item.startHour).padStart(2,'0')}:${String(item.startMinute).padStart(2,'0')}~${String(item.endHour).padStart(2,'0')}:${String(item.endMinute).padStart(2,'0')}`;
 
                 el.innerHTML = `
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2 overflow-hidden">
-                            <div class="w-2.5 h-2.5 rounded-full bg-indigo-500 shrink-0"></div>
-                            <span class="text-sm font-medium text-slate-700 truncate">${item.title}</span>
+                        <div class="flex items-center gap-1.5 overflow-hidden">
+                            <div class="w-2 h-2 rounded-full bg-indigo-500 shrink-0"></div>
+                            <span class="font-medium text-slate-700 truncate">${item.title}</span>
                         </div>
                         <div class="flex items-center gap-1">
-                            <button onclick="editItem('${item.id}')" class="text-slate-400 hover:text-indigo-600 text-xs px-1 py-0.5">수정</button>
-                            <button onclick="deleteItem('${item.id}')" class="text-slate-400 hover:text-rose-500 text-xs px-1 py-0.5">✕</button>
+                            <button onclick="editItem('${item.id}')" class="text-slate-400 hover:text-indigo-600 px-1">수정</button>
+                            <button onclick="deleteItem('${item.id}')" class="text-slate-400 hover:text-rose-500 px-1">✕</button>
                         </div>
                     </div>
-                    <div class="text-[10px] text-slate-400 pl-4">${dayNames[item.day]}요일 ${timeStr}${repeatDesc}</div>
-                    ${item.memo ? `<div class="text-[11px] text-slate-600 bg-slate-50 p-1.5 rounded mt-0.5 ml-4 border border-slate-100">📝 ${item.memo}</div>` : ''}
+                    <div class="text-[10px] text-slate-400 pl-3.5">${dayNames[item.day]}요일 ${timeStr}${repeatDesc}</div>
+                    ${item.memo ? `<div class="text-[10px] text-slate-600 bg-slate-50 p-1 rounded mt-0.5 pl-3.5">📝 ${item.memo}</div>` : ''}
                 `;
                 container.appendChild(el);
             });
@@ -932,21 +878,15 @@
             let targetSchedules = [];
             currentWeekItems.forEach(item => {
                 let applies = false;
-                if (item.repeat === 'daily') {
-                    applies = true;
-                } else if (item.day === targetDay) {
-                    applies = true;
-                } else if (item.repeatDays && item.repeatDays.includes(targetDay)) {
-                    applies = true;
-                }
+                if (item.repeat === 'daily') applies = true;
+                else if (item.day === targetDay) applies = true;
+                else if (item.repeatDays && item.repeatDays.includes(targetDay)) applies = true;
 
-                if (applies) {
-                    targetSchedules.push(item);
-                }
+                if (applies) targetSchedules.push(item);
             });
 
             if (targetSchedules.length === 0) {
-                container.innerHTML = '<div class="text-xs text-indigo-400 text-center py-2">해당 요일에 등록된 스케줄이 없습니다.</div>';
+                container.innerHTML = '<div class="text-xs text-indigo-400 text-center py-2">해당 요일 스케줄이 없습니다.</div>';
                 return;
             }
 
@@ -956,17 +896,17 @@
                 const timeStr = `${String(sch.startHour).padStart(2,'0')}:${String(sch.startMinute).padStart(2,'0')}~${String(sch.endHour).padStart(2,'0')}:${String(sch.endMinute).padStart(2,'0')}`;
 
                 const el = document.createElement('div');
-                el.className = `flex flex-col p-2.5 rounded-lg border shadow-sm transition gap-1 ${isChecked ? 'bg-emerald-50/60 border-emerald-200' : 'bg-white border-indigo-100'}`;
+                el.className = `flex flex-col p-2 rounded-lg border shadow-sm transition gap-0.5 text-xs ${isChecked ? 'bg-emerald-50/60 border-emerald-200' : 'bg-white border-indigo-100'}`;
 
                 el.innerHTML = `
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2.5 overflow-hidden">
-                            <input type="checkbox" ${isChecked ? 'checked' : ''} onclick="toggleChecklistItem('${checkKey}')" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                            <span class="text-sm font-medium ${isChecked ? 'line-through text-emerald-700' : 'text-slate-700'}">${sch.title}</span>
+                        <div class="flex items-center gap-2 overflow-hidden">
+                            <input type="checkbox" ${isChecked ? 'checked' : ''} onclick="toggleChecklistItem('${checkKey}')" class="w-4 h-4 rounded text-indigo-600 cursor-pointer">
+                            <span class="font-medium ${isChecked ? 'line-through text-emerald-700' : 'text-slate-700'}">${sch.title}</span>
                         </div>
                         <span class="text-[10px] text-slate-400">${timeStr}</span>
                     </div>
-                    ${sch.memo ? `<div class="text-[11px] text-slate-600 bg-indigo-50/30 p-1.5 rounded ml-6 border border-indigo-50">📝 ${sch.memo}</div>` : ''}
+                    ${sch.memo ? `<div class="text-[10px] text-slate-600 bg-indigo-50/30 p-1 rounded pl-5">📝 ${sch.memo}</div>` : ''}
                 `;
                 container.appendChild(el);
             });
@@ -984,12 +924,10 @@
             grid.innerHTML = '';
             
             for (let hour = 0; hour < 24; hour++) {
-                if (isNightCollapsed && hour >= 0 && hour <= 5) {
-                    continue;
-                }
+                if (isNightCollapsed && hour >= 0 && hour <= 5) continue;
 
                 const timeLabel = document.createElement('div');
-                timeLabel.className = 'time-slot flex items-center justify-center text-xs font-semibold text-slate-400 bg-slate-50 border-r border-b border-slate-200';
+                timeLabel.className = 'time-slot flex items-center justify-center text-[11px] font-semibold text-slate-400 bg-slate-50 border-r border-b border-slate-200';
                 timeLabel.innerText = `${String(hour).padStart(2, '0')}:00`;
                 grid.appendChild(timeLabel);
 
@@ -1010,30 +948,26 @@
                 const startHour = item.startHour;
                 const startMinute = item.startMinute;
                 
-                if (isNightCollapsed && startHour >= 0 && startHour <= 5) {
-                    return;
-                }
+                if (isNightCollapsed && startHour >= 0 && startHour <= 5) return;
 
                 const cells = document.querySelectorAll('#calendar-grid > div');
                 let targetCell = null;
                 cells.forEach(c => {
-                    if (c.dataset.day == item.day && c.dataset.hour == startHour) {
-                        targetCell = c;
-                    }
+                    if (c.dataset.day == item.day && c.dataset.hour == startHour) targetCell = c;
                 });
 
                 if (targetCell) {
                     const badge = document.createElement('div');
                     const topOffset = (startMinute / 60) * 48;
-                    const heightPx = Math.max(24, (item.durationMinutes / 60) * 48 - 4);
+                    const heightPx = Math.max(22, (item.durationMinutes / 60) * 48 - 3);
 
-                    badge.className = `event-badge absolute left-1 right-1 p-1.5 rounded-lg border text-xs shadow-sm flex flex-col justify-between z-10 overflow-hidden ${item.color}`;
+                    badge.className = `event-badge absolute left-0.5 right-0.5 p-1 rounded border text-[11px] shadow-sm flex flex-col justify-between z-10 overflow-hidden ${item.color}`;
                     badge.style.top = `${topOffset}px`;
                     badge.style.height = `${heightPx}px`;
 
-                    const timeStr = `${String(item.startHour).padStart(2,'0')}:${String(item.startMinute).padStart(2,'0')}~${String(item.endHour).padStart(2,'0')}:${String(item.endMinute).padStart(2,'0')}`;
+                    const timeStr = `${String(item.startHour).padStart(2,'0')}:${String(item.startMinute).padStart(2,'0')}`;
                     badge.innerHTML = `
-                        <div class="font-bold truncate text-[11px]">${item.title}</div>
+                        <div class="font-bold truncate text-[10px]">${item.title}</div>
                         <div class="text-[9px] opacity-75">${timeStr}</div>
                     `;
                     targetCell.appendChild(badge);
@@ -1072,10 +1006,8 @@
                     item.title = titleInput.value.trim();
                     item.memo = memoInput.value.trim();
                     item.day = parseInt(daySelect.value, 10);
-                    item.startHour = startH;
-                    item.startMinute = startM;
-                    item.endHour = endH;
-                    item.endMinute = endM;
+                    item.startHour = startH; item.startMinute = startM;
+                    item.endHour = endH; item.endMinute = endM;
                     item.durationMinutes = durationMinutes;
                     item.repeat = repeatVal;
                     item.untilDate = untilInput.value;
@@ -1092,19 +1024,13 @@
                     title: titleInput.value.trim(),
                     memo: memoInput.value.trim(),
                     day: parseInt(daySelect.value, 10),
-                    startHour: startH,
-                    startMinute: startM,
-                    endHour: endH,
-                    endMinute: endM,
-                    durationMinutes: durationMinutes,
-                    repeat: repeatVal,
-                    untilDate: untilInput.value,
-                    repeatDays: [...selectedDays],
+                    startHour: startH, startMinute: startM,
+                    endHour: endH, endMinute: endM,
+                    durationMinutes, repeat: repeatVal,
+                    untilDate: untilInput.value, repeatDays: [...selectedDays],
                     color: randomColor
                 });
-                titleInput.value = '';
-                memoInput.value = '';
-                untilInput.value = '';
+                titleInput.value = ''; memoInput.value = ''; untilInput.value = '';
                 document.getElementById('main-repeat-check').checked = false;
                 handleMainRepeatCheck(false);
                 selectedDays = [];
@@ -1144,7 +1070,7 @@
             selectedDays = item.repeatDays ? [...item.repeatDays] : [];
             renderDayButtons();
 
-            document.getElementById('submit-btn').innerText = '수정 즉시 반영';
+            document.getElementById('submit-btn').innerText = '수정 반영';
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
         };
 
@@ -1156,7 +1082,7 @@
             handleMainRepeatCheck(false);
             selectedDays = [];
             renderDayButtons();
-            document.getElementById('submit-btn').innerText = '스케줄 즉시 추가';
+            document.getElementById('submit-btn').innerText = '스케줄 추가';
             document.getElementById('cancel-edit-btn').classList.add('hidden');
         };
 
